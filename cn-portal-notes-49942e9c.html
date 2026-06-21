@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>说球帝 · 简明信息卡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f4f8fc;
+            color: #1a2a3a;
+            line-height: 1.6;
+            padding: 20px 16px 40px;
+        }
+
+        .page {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        /* hero 区域 */
+        .hero {
+            background: linear-gradient(145deg, #e0f2f1, #ccf0f0);
+            border-radius: 36px 36px 24px 24px;
+            padding: 36px 24px 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 20px rgba(0, 128, 128, 0.08);
+            border: 1px solid rgba(0, 150, 136, 0.15);
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #00695c;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            color: #2e5b5a;
+            max-width: 520px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px 16px;
+            border-radius: 60px;
+            backdrop-filter: blur(2px);
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        .hero .sub i {
+            font-style: normal;
+            background: #b2dfdb;
+            padding: 0 10px;
+            border-radius: 30px;
+            color: #004d40;
+            font-weight: 500;
+        }
+
+        .hero .guide-tag {
+            display: block;
+            margin-top: 18px;
+            font-size: 0.9rem;
+            color: #3a6b68;
+            border-left: 4px solid #00897b;
+            padding-left: 14px;
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 0 12px 12px 0;
+            line-height: 1.7;
+        }
+
+        /* 网格卡片区 (两列自适应) */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 32px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 22px 18px 20px;
+            box-shadow: 0 4px 12px rgba(0, 80, 80, 0.06);
+            transition: transform 0.15s ease, box-shadow 0.2s;
+            border: 1px solid #ddeae8;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(0, 100, 100, 0.08);
+        }
+
+        .card .emoji-badge {
+            display: inline-block;
+            font-size: 1.8rem;
+            background: #e0f2f1;
+            width: 48px;
+            height: 48px;
+            border-radius: 20px;
+            text-align: center;
+            line-height: 48px;
+            margin-bottom: 14px;
+            color: #00695c;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #004d40;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .card p, .card ul {
+            font-size: 0.92rem;
+            color: #1d3f3d;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding: 4px 0 4px 22px;
+            position: relative;
+        }
+
+        .card li::before {
+            content: "·";
+            position: absolute;
+            left: 6px;
+            color: #00897b;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .accent-border {
+            border-left: 4px solid #00897b;
+        }
+
+        /* 特色行 (全宽卡片) */
+        .feature-row {
+            background: white;
+            border-radius: 28px;
+            padding: 24px 22px;
+            margin-bottom: 28px;
+            border: 1px solid #d4e6e3;
+            box-shadow: 0 3px 10px rgba(0, 70, 70, 0.04);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px 28px;
+        }
+
+        .feature-row .num {
+            font-size: 2.6rem;
+            font-weight: 200;
+            color: #2b9b8b;
+            line-height: 1;
+            width: 60px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .feature-row .content {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .feature-row .content p {
+            font-size: 0.96rem;
+            color: #1f4240;
+        }
+
+        .feature-row .content strong {
+            color: #00695c;
+        }
+
+        /* 提示区域（FAQ摘要风格） */
+        .tips-panel {
+            background: #f1faf9;
+            border-radius: 28px;
+            padding: 24px 22px 22px;
+            margin-bottom: 24px;
+            border: 1px solid #c2dfdb;
+            box-shadow: inset 0 1px 4px rgba(0, 100, 90, 0.04);
+        }
+
+        .tips-panel h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #00695c;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .tips-panel .faq-item {
+            padding: 12px 0;
+            border-bottom: 1px dashed #b2d4cf;
+        }
+
+        .tips-panel .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item .q {
+            font-weight: 500;
+            color: #004d40;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .faq-item .a {
+            font-size: 0.92rem;
+            color: #28504b;
+            padding-left: 4px;
+        }
+
+        .faq-item .a a {
+            color: #00695c;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #80cbc4;
+            font-weight: 500;
+        }
+
+        .faq-item .a a:hover {
+            text-decoration-color: #00695c;
+        }
+
+        /* 自然链接段落 */
+        .link-paragraph {
+            background: #dff0ed;
+            border-radius: 60px 28px 28px 60px;
+            padding: 18px 24px;
+            margin: 12px 0 32px;
+            font-size: 0.96rem;
+            color: #1f4a44;
+            border-left: 6px solid #00897b;
+        }
+
+        .link-paragraph a {
+            color: #004d40;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 2px;
+            text-decoration-color: #80cbc4;
+        }
+
+        .link-paragraph a:hover {
+            text-decoration-color: #004d40;
+        }
+
+        /* 小字 */
+        .footnote {
+            font-size: 0.8rem;
+            color: #5b7b77;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid #d0e2de;
+            padding-top: 24px;
+            letter-spacing: 0.02em;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 550px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .hero {
+                padding: 28px 18px 24px;
+                border-radius: 28px;
+            }
+
+            .feature-row {
+                padding: 20px 16px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .feature-row .num {
+                width: auto;
+                font-size: 2rem;
+                text-align: left;
+            }
+
+            .link-paragraph {
+                border-radius: 24px;
+                padding: 16px 18px;
+                border-left-width: 4px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .card .emoji-badge {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- HERO 主视觉 + 简明指南 -->
+    <div class="hero">
+        <h1>说球帝 · 入门指引</h1>
+        <div class="sub">
+            <i>⚡ 简明指南</i> 从定位到使用，一次理清
+        </div>
+        <span class="guide-tag">
+            🔍 想快速了解一个体育信息平台？这篇卡片式说明整理了 <strong>用途 · 适合人群 · 要点提示</strong>，方便你按需参考。
+        </span>
+    </div>
+
+    <!-- 网格卡片：用途 & 适合人群 -->
+    <div class="card-grid">
+        <!-- 用途卡片 -->
+        <div class="card">
+            <div class="emoji-badge">📋</div>
+            <h3>主要用途</h3>
+            <p>聚合体育动态、赛事资讯、球队数据与社区讨论，适合日常关注篮球、足球等多个项目的爱好者。平台整合了文字直播、比分速递和赛后分析，方便快速获取信息而不必打开多个来源。</p>
+        </div>
+
+        <!-- 适合人群卡片 -->
+        <div class="card">
+            <div class="emoji-badge">👥</div>
+            <h3>适合人群</h3>
+            <ul>
+                <li>希望一站式查看比分和赛程的普通球迷</li>
+                <li>喜欢阅读简短赛事快讯和球员动态的用户</li>
+                <li>需要快速查找历史数据或联赛排名的分析型用户</li>
+                <li>对社区讨论、球迷观点有一定兴趣的交流者</li>
+            </ul>
+        </div>
+
+        <!-- 卡片3：特点与亮点 (差异化) -->
+        <div class="card accent-border">
+            <div class="emoji-badge">✨</div>
+            <h3>特点速览</h3>
+            <ul>
+                <li>界面以信息密度优先，一屏展示多场比赛</li>
+                <li>深度数据模块（控球率、射门、球员评分）</li>
+                <li>专题策划：转会传闻、赛事前瞻、冷门盘点</li>
+                <li>个人关注功能，定制主队信息流</li>
+            </ul>
+        </div>
+
+        <!-- 卡片4：使用场景举例 -->
+        <div class="card">
+            <div class="emoji-badge">📱</div>
+            <h3>常见场景</h3>
+            <ul>
+                <li>通勤时快速查看前一夜的比赛结果</li>
+                <li>工作间隙浏览即时进球提醒</li>
+                <li>赛前查阅双方历史交锋记录</li>
+                <li>赛后阅读简评和球迷热评</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 (嵌入 a 标签，文本为"说球帝") -->
+    <div class="link-paragraph">
+        💡 如果你希望进一步了解平台的全部功能与最新内容，可以前往 <a href="https://cn-portal-shuoqiudi.com">说球帝</a> 自行探索。该网站提供的资讯覆盖主流联赛与热门赛事，页面结构清晰，适合日常快速浏览。
+    </div>
+
+    <!-- 提示 & FAQ 摘要 (差异化) -->
+    <div class="tips-panel">
+        <h2>📌 访问提醒 · 常见疑问</h2>
+
+        <div class="faq-item">
+            <span class="q">▸ 需要注册才能使用吗？</span>
+            <span class="a">大部分内容（比分、赛程、资讯）可直接浏览，部分互动功能如评论、收藏可能需注册账号。</span>
+        </div>
+        <div class="faq-item">
+            <span class="q">▸ 移动端适配如何？</span>
+            <span class="a">页面采用响应式设计，在手机浏览器上排版紧凑，支持横竖屏切换，阅读体验良好。</span>
+        </div>
+        <div class="faq-item">
+            <span class="q">▸ 信息更新速度怎么样？</span>
+            <span class="a">文字直播和比分通常实时或接近实时。赛后文章、数据统计会在比赛结束后较短时间内发布。</span>
+        </div>
+        <div class="faq-item">
+            <span class="q">▸ 除了篮球足球还有其它项目吗？</span>
+            <span class="a">以足球、篮球为主，同时涵盖网球、电竞、综合体育等热点内容，但深度与频次因项目而异。</span>
+        </div>
+    </div>
+
+    <!-- 额外引导行 (自然嵌入链接) 配合 “说球帝” 文本 -->
+    <div class="feature-row">
+        <div class="num">🔗</div>
+        <div class="content">
+            <p><strong>一句话总结</strong> — 如果你需要一个集中获取体育动态的信息站，不妨试试 <a href="https://cn-portal-shuoqiudi.com" style="color:#00695c;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#80cbc4;font-weight:600;">说球帝</a> 。它不替代深度媒体，但足够应对日常快速查阅的需求。</p>
+        </div>
+    </div>
+
+    <div class="footnote">
+        · 本文档为独立说明页 · 内容基于公开信息整理 · 仅供用户参考 ·
+    </div>
+
+</div>
+</body>
+</html>
